@@ -1,0 +1,22 @@
+name: main
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Prepare artifact
+      run: |
+          echo Download Realm667/WolfenDoom master.zip
+          curl -fSL https://codeload.github.com/Realm667/WolfenDoom/zip/master -o WolfenDoom-master.zip
+          echo WolfenDoom-master.zip downloaded
+      shell: cmd
+
+    - uses: actions/upload-artifact@master
+      with:
+        name: Workflow_Artifact
+        path: WolfenDoom-master.zip
